@@ -1,0 +1,77 @@
+{% extends 'base.htm' %}
+
+{% block title %}
+  DASHBOARD
+{% endblock title %}
+
+{% block body %}
+
+
+    <div class="container">
+
+         <div class="row">
+            <div class="col-sm-12 mt-4 text-left">
+                <h2> WELCOME  {{name|upper}} </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 mt-4 text-center">
+                <h2 class=" alert alert-danger"> STUDENT INFO </h2>
+            </div>
+        </div>
+        
+        
+        <div class="row">
+            <div class="col-sm-12 mt-4 text-center">
+                {% if stu %}
+                <table class=" table">
+                    <thead>
+                        <tr>
+                        <th>NAME</th>
+                        <th> FATHER'S NAME</th>
+                        <th> MOTHER'S NAME</th>
+                        <th>ADDRESS</th>
+                        <th> COURSE </th>
+                        <th> ACTION </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for stus in stu %}
+                         <tr>
+                          <td>{{stus.name}}</td>
+                          <td>{{stus.father_n}}</td>
+                          <td>{{stus.mother_n}}</td>
+                          <td>{{stus.address}}</td>
+                          <td>{{stus.course}}</td>
+                          <td>
+                              <a href=" {% url 'edit' stus.id %}" class=" btn-sm btn btn-info"> EDIT</a>
+                              <form action="" class="d-inline" method="POST">
+                                  {% csrf_token %}
+                                <a href=" {% url 'delete' stus.id %}" class=" btn-sm btn btn-danger"> DELETE</a>
+                              </form>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <h3>  NO STUDENT DATA </h3>    
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12 mt-4 text-center">
+                <a href="{% url 'logout' %}" class=" btn btn-dark"> LOGOUT </a>
+                <a href="{% url 'add' %}" class=" btn btn-success"> ADD STUDENT </a>
+                
+            </div>
+        </div>
+        
+    </div>
+
+
+{% endblock body %}

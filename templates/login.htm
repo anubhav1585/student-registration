@@ -1,0 +1,31 @@
+{% extends 'base.htm' %}
+
+{% block title %}
+  LOGIN
+{% endblock title %}
+
+
+{% block body %}
+
+    <div class="container">
+        
+        <div class="row">
+            <div class=" text-center mt-4 col-sm-12">
+                <h2> LOGIN </h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class=" text-center mt-5 p-3 col-sm-4 offset-4 border border-success">
+                <form action="" novalidate  method="POST"> 
+                    {% csrf_token %}
+                        {% for forms in lf %}
+                            {{forms.label_tag}} {{forms}} {{forms.error}} <br> <br>
+                        
+                        {% endfor %}
+                    <input type="submit" value="LOGIN">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

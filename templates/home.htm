@@ -1,0 +1,59 @@
+{% extends 'base.htm' %}
+
+{% block title %} HOME
+{% endblock title %}
+
+{% block style %}
+    
+
+
+  
+{% endblock style %}
+
+{% block body %}
+<div id="container" class="container">
+    <div class="row">
+        <div class="col-sm-12 mt-4 text-center">
+            {% if stu %}
+            <table class=" table">
+                <thead>
+                    <tr>
+                    <th>NAME</th>
+                    <th> MATHS</th>
+                    <th> HINDI </th>
+                    <th> SOCIAL SCIENCE</th>
+                    <th> SCIENCE </th>
+                    <th> ENGLISH </th>
+                    <th>ACTION</th>  
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for stus in stu %}
+                     <tr>
+                      <td>{{stus.name}}</td>
+                      <td>{{stus.maths}}</td>
+                      <td>{{stus.hindi}}</td>
+                      <td>{{stus.social_science}}</td>
+                      <td>{{stus.science}}</td>
+                        <td> {{ stus.english}}</td>
+                      <td>
+                          <a href=" {% url 'edit' stus.id %}" class=" btn-sm btn btn-info"> EDIT</a>
+                          <form action="" class="d-inline" method="POST">
+                              {% csrf_token %}
+                            <a href=" {% url 'delete' stus.id %}" class=" btn-sm btn btn-danger"> DELETE</a>
+                          </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <h3>  NO STUDENT DATA </h3>    
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock body %}

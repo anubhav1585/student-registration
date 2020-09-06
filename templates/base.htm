@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title> {% block title %}
+        {% endblock title %} </title>
+
+    <style>
+        {% block style %}
+          
+        {% endblock style %}
+    </style>
+     
+        
+</head>
+
+<body>
+    <div class="container">
+
+        <nav class=" style navbar bg-dark rounded  navbar-info  navbar-expand ">
+            <h4 class=" navbar-brand text-danger"> STU </h4>
+            <ul class=" navbar-nav ">
+                <a href="{% url 'home' %}" class=" text-right offset-2 nav-link"> HOME </a>
+                <a href="{% url 'about' %}" class=" text-right nav-link">  ABOUT </a>
+                {% if  request.user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class=" text-right nav-link "> DASHBOARD </a>
+                <a href="{% url 'logout' %}" class=" text-right nav-link"> LOGOUT </a>
+                {% else  %}
+                        
+                <a href="{% url 'login' %}" class=" text-right nav-link"> LOGIN </a>
+                <a href="{% url 'signup' %}" class=" text-right nav-link"> SIGNUP </a>
+                {% endif %}
+
+            </ul>
+            
+        </nav>
+
+        {% block body %}
+        {% endblock body %}
+
+    </div>
+</body>
+
+</html>
